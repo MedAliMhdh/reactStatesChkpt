@@ -1,15 +1,14 @@
 import React from "react";
 import "./App.css";
-import myimg from "./photo.jpg";
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       Person: {
-        fullName: "Mohamed Aliiiiiiiiiiiiiiiiiiiiiiiiiiii",
-        bio: "xxxxxxxxxxxxxx",
-        // imgSrc: { myImg },
+        fullName: "Mohamed Ali",
+        bio: "Here is my bio",
+        imgSrc: "/photo.jpg",
         profession: "engineer",
       },
       toggle: false,
@@ -21,22 +20,28 @@ class App extends React.Component {
       ? this.setState({ toggle: false })
       : this.setState({ toggle: true });
 
+  incrementCounter = () => {
+    const { counter } = this.state;
+    this.state.toggle
+      ? this.setState({ counter: counter + 1 })
+      : this.setState({ counter: 0 });
+  };
+
+  componentDidMount = () => {
+    setInterval(this.incrementCounter, 1000);
+  };
+
   render() {
     return (
       <div>
-        <button
-          onClick={this.handleClick}
-          style={{ width: "100px", height: "30px" }}
-        >
+        <p>{this.state.counter}</p>
+        <button onClick={this.handleClick}>
           {this.state.toggle ? "Hide" : "show"}
         </button>
         {this.state.toggle && (
-          <div
-            className="App"
-            style={{ display: "flex", justifyContent: "center" }}
-          >
+          <div className="App">
             <div className="ImgSide">
-              <img src={myimg} style={{ width: "400px" }} />
+              <img src={this.state.Person.imgSrc} />
             </div>
             <div className="rightSide">
               <div>{this.state.Person.fullName}</div>
